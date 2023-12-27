@@ -15,10 +15,11 @@ import java.util.List;
 
 
 public class Main {
+    static Path input = (Paths.get(".\\src\\main\\java\\com\\walking\\intensive\\chapter5\\task22\\input.txt")); // Путь, где будет лежать input.txt
+    static Path output = (Paths.get(".\\src\\main\\java\\com\\walking\\intensive\\chapter5\\task22\\output.txt")); // Путь, где будет лежать output.txt
 
     public static void main(String[] args) throws IOException {
         Metallica metallica = new Metallica(); // Здесь хранится песня
-        Path input = (Paths.get(".\\src\\main\\java\\com\\walking\\intensive\\chapter5\\task22\\input.txt")); // Путь, где будет лежать input.txt
 
         if (Files.notExists(input)) { // Если файла нет, то создаем
             Files.createFile(input);
@@ -34,7 +35,8 @@ public class Main {
 
         try (BufferedReader reader = Files.newBufferedReader(input)) { // Считываем слова по отдельности, сразу приводя к нижнему регистру и удаляя знаки препинания
             while (reader.ready()) {
-                songWords.addAll(Arrays.asList(reader.readLine().toLowerCase().replaceAll("[,.]", "").split("\s+")));
+                String word = reader.readLine().toLowerCase().replaceAll("[,.]", "");
+                songWords.addAll(Arrays.asList(word.split("\s+")));
             }
         }
 
@@ -53,9 +55,7 @@ public class Main {
                 maxValue = wordCount.get(word);
                 key = word;
             }
-        }
-
-        Path output = (Paths.get(".\\src\\main\\java\\com\\walking\\intensive\\chapter5\\task22\\output.txt")); // Путь, где будет лежать output.txt
+       }
 
         if (Files.notExists(output)) { // Если файла нет, то создаем
             Files.createFile(output);
